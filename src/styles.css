@@ -35,6 +35,22 @@ li {
   margin: 0;
   padding: 0;
 }
+
+.weather-temperature img {
+  height: 80px;
+  width: 80px;
+}
+.weather-temperature strong {
+  font-size: 45px;
+  line-height: 1;
+  position: relative;
+  top: 5px;
+}
+
+.weather-temperature .units {
+  position: relative;
+  top: -15px;
+}
 .weather-temperature .units a {
   text-decoration: none;
 }
