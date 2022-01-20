@@ -10,6 +10,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/styles.css" />
     <title>Weather App - Michelle Mapleston</title>
   </head>
@@ -17,14 +18,14 @@
     <div class="container">
       <div class="WeatherAppWrapper">
         <div class="WeatherApp">
-          <h1>Sydney, AU</h1>
-          <h2>Sunday 19:48, few clouds</h2>
+          <h1 id="city"></h1>
+          <h2>Sunday 19:48, <span id="description">few clouds</span></h2>
           <div class="row">
             <div class="col-6">
               <ul>
-                <li>Humidity: <strong>83%</strong></li>
-                <li>Wind: <strong>0.89km/h</strong></li>
-                <li>Precipitation: <strong>5%</strong></li>
+                <li id="humidity">Humidity: <strong>83%</strong></li>
+                <li id="wind">Wind: <strong>0.89km/h</strong></li>
+                <li id="precipitation">Precipitation: <strong>5%</strong></li>
               </ul>
             </div>
             <div class="col-6">
@@ -34,7 +35,7 @@
                   alt="partly cloudy"
                   class="float-right"
                 />
-                <strong>24</strong>
+                <strong id="temperature"></strong>
                 <span class="units"
                   ><a href="#"> °C</a> | <a href="#">°F</a></span
                 >

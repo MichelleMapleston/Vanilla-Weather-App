@@ -26,6 +26,10 @@ h2 {
   line-height: 20px;
 }
 
+#description {
+  text-transform: capitalize;
+}
+
 ul {
   margin: 0;
   padding: 0;
