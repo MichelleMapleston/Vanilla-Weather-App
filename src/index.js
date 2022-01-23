@@ -76,7 +76,6 @@ function displayCelsiusTemp(event) {
 
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitAction);
-search("Adelaide");
 
 let fahrenheitElement = document.querySelector("#fahrenheit-link");
 fahrenheitElement.addEventListener("click", displayFahrenheitTemp);
@@ -85,3 +84,5 @@ let celsiusElement = document.querySelector("#celsius-link");
 celsiusElement.addEventListener("click", displayCelsiusTemp);
 
 let celsiusTemperature = null;
+
+search("Adelaide");
