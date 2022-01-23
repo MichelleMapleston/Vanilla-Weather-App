@@ -25,7 +25,8 @@ function displayCurrentData(response) {
   let feelsElement = document.querySelector("#feels");
   let dateElement = document.querySelector("#date-time");
   let iconElement = document.querySelector("#icon");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemperature = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   descriptionElement.innerHTML = response.data.weather[0].main;
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
@@ -47,14 +48,27 @@ function search(city) {
   axios.get(apiUrl).then(displayCurrentData);
 }
 
-//submit action - getting value
+//submit action - getting the value
 function submitAction(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
 }
 
-//submit listen
+//displays fahrenheit temp
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitTemp = Math.round((celsiusTemperature * 9) / 5 + 32);
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = fahrenheitTemp;
+}
+
+//submit listen event
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitAction);
 search("Adelaide");
+
+let fahrenheitElement = document.querySelector("#fahrenheit-link");
+fahrenheitElement.addEventListener("click", displayFahrenheitTemp);
+
+let celsiusTemperature = null;
