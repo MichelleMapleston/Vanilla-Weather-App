@@ -15,6 +15,7 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+//display data based on search value
 function displayCurrentData(response) {
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -38,8 +39,22 @@ function displayCurrentData(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-let city = "Adelaide";
-let apiKey = "d9d69bcfd71a3f130af2081484a0b61a";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+//search using the form input value
+function search(city) {
+  let apiKey = "d9d69bcfd71a3f130af2081484a0b61a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(displayCurrentData);
+  axios.get(apiUrl).then(displayCurrentData);
+}
+
+//submit action - getting value
+function submitAction(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  search(cityInputElement.value);
+}
+
+//submit listen
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", submitAction);
+search("Adelaide");
