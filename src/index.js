@@ -2,6 +2,9 @@ function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
   let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
   let days = [
     "Sunday",
     "Monday",
@@ -38,7 +41,6 @@ function displayCurrentData(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
-  console.log(response.data);
 }
 
 //search using the form input value
