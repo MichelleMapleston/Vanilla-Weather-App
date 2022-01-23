@@ -25,14 +25,16 @@ function displayCurrentData(response) {
   let dateElement = document.querySelector("#date-time");
   temperatureElement.innerHTML = Math.round(response.data.main.temp);
   cityElement.innerHTML = response.data.name;
-  descriptionElement.innerHTML = response.data.weather[0].description;
+  descriptionElement.innerHTML = response.data.weather[0].main;
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)}km/h`;
   feelsElement.innerHTML = `${Math.round(response.data.main.feels_like)}°C`;
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+  console.log(response.data);
 }
 
+let city = "Sydney";
 let apiKey = "d9d69bcfd71a3f130af2081484a0b61a";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}&units=metric`;
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
 axios.get(apiUrl).then(displayCurrentData);
