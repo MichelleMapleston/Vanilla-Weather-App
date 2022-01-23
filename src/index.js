@@ -27,7 +27,7 @@ function displayCurrentData(response) {
   let iconElement = document.querySelector("#icon");
   celsiusTemperature = response.data.main.temp;
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
-  cityElement.innerHTML = response.data.name;
+  cityElement.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   descriptionElement.innerHTML = response.data.weather[0].main;
   humidityElement.innerHTML = `${response.data.main.humidity}%`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)}km/h`;
@@ -38,6 +38,7 @@ function displayCurrentData(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+  console.log(response.data);
 }
 
 //search using the form input value
@@ -63,12 +64,22 @@ function displayFahrenheitTemp(event) {
   temperatureElement.innerHTML = fahrenheitTemp;
 }
 
-//submit listen event
+//displays celsius temp
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  let celsiusTemp = Math.round(celsiusTemperature);
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = celsiusTemp;
+}
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitAction);
 search("Adelaide");
 
 let fahrenheitElement = document.querySelector("#fahrenheit-link");
 fahrenheitElement.addEventListener("click", displayFahrenheitTemp);
+
+let celsiusElement = document.querySelector("#celsius-link");
+celsiusElement.addEventListener("click", displayCelsiusTemp);
 
 let celsiusTemperature = null;
