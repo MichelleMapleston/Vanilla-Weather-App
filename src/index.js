@@ -74,6 +74,32 @@ function displayCelsiusTemp(event) {
   temperatureElement.innerHTML = celsiusTemp;
 }
 
+//display forecast data
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <div class="forecast-day">${day}</div>
+                <img
+                  src="http://openweathermap.org/img/wn/01d@2x.png"
+                  alt=""
+                  id="forecast-image"
+                  width="50px"
+                />
+                <div class="forecast-temperatures">
+                  <span class="forecast-maximum">38°C</span>
+                  <span class="forecast-minimum">22°C</span>
+                </div>
+              </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitAction);
 
@@ -86,3 +112,5 @@ celsiusElement.addEventListener("click", displayCelsiusTemp);
 let celsiusTemperature = null;
 
 search("Adelaide");
+
+displayForecast();
