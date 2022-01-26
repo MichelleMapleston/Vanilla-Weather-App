@@ -69,3 +69,22 @@ li {
 .footer a {
   text-decoration: none;
 }
+
+.weather-forecast {
+  padding-top: 15px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.forecast-day {
+  font-weight: bold;
+}
+
+.forecast-temperatures {
+  font-size: 13px;
+}
+
+.forecast-minimum {
+  opacity: 0.6;
+}
