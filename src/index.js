@@ -18,6 +18,13 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+//retrieves the 7 day forecast data based on GPS coords from current city data
+function getForecastData(coords) {
+  let apiKey = "d9d69bcfd71a3f130af2081484a0b61a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.lat}&lon=${coords.lon}&exclude=minutely,hourly,alerts&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 //display data based on search value
 function displayCurrentData(response) {
   let temperatureElement = document.querySelector("#temperature");
@@ -41,6 +48,8 @@ function displayCurrentData(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecastData(response.data.coord);
 }
 
 //search using the form input value
@@ -75,7 +84,7 @@ function displayCelsiusTemp(event) {
 }
 
 //display forecast data
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -98,6 +107,7 @@ function displayForecast() {
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+  console.log(response.data.daily);
 }
 
 let form = document.querySelector("#search-form");
@@ -112,5 +122,3 @@ celsiusElement.addEventListener("click", displayCelsiusTemp);
 let celsiusTemperature = null;
 
 search("Adelaide");
-
-displayForecast();
