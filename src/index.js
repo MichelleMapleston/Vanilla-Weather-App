@@ -18,6 +18,15 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+//display forecast timestamp in days
+function formatForecastDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 //retrieves the 7 day forecast data based on GPS coords from current city data
 function getForecastData(coords) {
   let apiKey = "d9d69bcfd71a3f130af2081484a0b61a";
@@ -85,29 +94,39 @@ function displayCelsiusTemp(event) {
 
 //display forecast data
 function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-                <div class="forecast-day">${day}</div>
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+                <div class="forecast-day">${formatForecastDay(
+                  forecastDay.dt
+                )}</div>
                 <img
-                  src="http://openweathermap.org/img/wn/01d@2x.png"
+                  src="http://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
                   alt=""
                   id="forecast-image"
                   width="50px"
                 />
                 <div class="forecast-temperatures">
-                  <span class="forecast-maximum">38°C</span>
-                  <span class="forecast-minimum">22°C</span>
+                  <span class="forecast-maximum">${Math.round(
+                    forecastDay.temp.max
+                  )}°C</span>
+                  <span class="forecast-minimum">${Math.round(
+                    forecastDay.temp.min
+                  )}°C</span>
                 </div>
               </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(response.data.daily);
 }
 
 let form = document.querySelector("#search-form");
