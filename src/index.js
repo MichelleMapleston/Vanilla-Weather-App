@@ -141,3 +141,9 @@ celsiusElement.addEventListener("click", displayCelsiusTemp);
 let celsiusTemperature = null;
 
 search("Parramatta");
+
+what3words.api
+  .convertToCoordinates("filled.count.soap")
+  .then(function (response) {
+    console.log("[convertToCoordinates]", response);
+  });
