@@ -69,11 +69,24 @@ function search(city) {
   axios.get(apiUrl).then(displayCurrentData);
 }
 
+function w3wsearch(city) {
+  what3words.api.convertToCoordinates(city).then(function (response) {
+    console.log("[convertToCoordinates]", response);
+  });
+}
+
 //submit action - getting the value
 function submitAction(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
+}
+
+//submit w3w action - getting the value
+function submitW3wAction(event) {
+  event.preventDefault();
+  let w3wInputElement = document.querySelector("#w3w-cityinput");
+  w3wsearch(w3wInputElement.value);
 }
 
 //displays fahrenheit temp
@@ -132,6 +145,9 @@ function displayForecast(response) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", submitAction);
 
+let w3wform = document.querySelector("#w3w-form");
+w3wform.addEventListener("submit", submitW3wAction);
+
 let fahrenheitElement = document.querySelector("#fahrenheit-link");
 fahrenheitElement.addEventListener("click", displayFahrenheitTemp);
 
@@ -141,9 +157,3 @@ celsiusElement.addEventListener("click", displayCelsiusTemp);
 let celsiusTemperature = null;
 
 search("Parramatta");
-
-what3words.api
-  .convertToCoordinates("filled.count.soap")
-  .then(function (response) {
-    console.log("[convertToCoordinates]", response);
-  });
